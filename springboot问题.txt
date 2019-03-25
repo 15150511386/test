@@ -1,0 +1,38 @@
+未解决：报错404：jquery里面：xhr.send( ( s.hasContent && s.data ) || null );
+修补方法：在pom.xml里面增加了jquery的依赖
+
+
+
+分页插件层摆放顺序是否有要求
+mapper层
+ //使用分页插件进行分页查询+条件
+    List<Map<String,Object>> queryAllPage(Student stu);
+service层：
+  //使用分页插件进行分页查询+条件
+    PageInfo<Map<String,Object>> queryAllPage(Student stu,Integer pNo);
+impl层:
+ @Override
+    public PageInfo<Map<String, Object>> queryAllPage(Student stu,Integer pNo) {
+        //定义PageHelper类
+        // PageHelper.startPage(当前页数,每页显示的数量)
+        PageHelper.startPage(pNo,2);
+        //调用分页查询方法
+        List<Map<String,Object>> stus = studentMapper.queryAllPage(stu);
+        //创建PageInfo类
+        PageInfo<Map<String, Object>> mapPageInfo = new PageInfo<Map<String, Object>>(stus);
+        return mapPageInfo;
+    }
+
+
+
+atatic下的mapper.xml：parameterType返回的类型不一致
+
+为什么只有select?没有增删改
+
+queryAll.js中为什么穿参是.html而不是.do
+ <a href='/updateStu.html?sid="+obj[i].sid+"'>修改</a> " +
+                    "           <a href='javascript:void(0);' onclick='del("+obj[i].sid+")'>删除</a> " +
+
+
+js页面里的ajax:的url地址为Controller的**.do,而success里面页面跳转为什么是.html?sid==...传参数？那么html里面页面跳转的地址是什么？onclick。。。
+
